@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى أمي الغالية عبير 🤍 | مشروع مستقبلي يبدأ منكِ</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Tajawal & Amiri) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            DEFAULT: '#FAF8F5',
+                            dark: '#F3EEE8',
+                            light: '#FFFFFF'
+                        },
+                        burgundy: {
+                            DEFAULT: '#581C25',
+                            dark: '#3B1017',
+                            light: '#7A2B37',
+                        },
+                        rose: {
+                            soft: '#E8B4B8',
+                            light: '#F4DCD6',
+                            deep: '#C26D75'
+                        },
+                        gold: {
+                            DEFAULT: '#C5A059',
+                            light: '#EAD196',
+                            dark: '#9A7836'
+                        },
+                        slateDark: '#1E293B'
+                    },
+                    fontFamily: {
+                        tajawal: ['Tajawal', 'sans-serif'],
+                        amiri: ['Amiri', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft-lg': '0 10px 30px -5px rgba(88, 28, 37, 0.08)',
+                        'gold-glow': '0 0 20px rgba(197, 160, 89, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #FAF8F5;
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C5A059;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #581C25;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #581C25 0%, #C5A059 50%, #9A7836 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Audio Wave Bar Indicator */
+        .bar {
+            width: 3px;
+            height: 12px;
+            background-color: #C5A059;
+            border-radius: 3px;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+        .bar:nth-child(2) { animation-delay: 0.2s; }
+        .bar:nth-child(3) { animation-delay: 0.4s; }
+        .bar:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            0%, 100% { height: 4px; }
+            50% { height: 18px; }
+        }
+
+        .paused .bar {
+            animation: none;
+            height: 4px;
+        }
+
+        .device-tab-active {
+            background: #581C25;
+            color: #FAF8F5;
+            box-shadow: 0 4px 15px rgba(88, 28, 37, 0.25);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-rose-soft selection:text-burgundy-dark">
+
+    <!-- Subtle Floating Background Ornaments -->
+    <div class="fixed top-10 right-10 w-72 h-72 bg-rose-light/40 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-gold-light/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- Audio Toggle Button -->
+    <div class="fixed top-5 left-5 z-50">
+        <button id="audioToggleBtn" onclick="toggleAudio()" class="glass-card flex items-center gap-3 px-4 py-2.5 rounded-full hover:border-gold transition-all duration-300 shadow-soft-lg group cursor-pointer">
+            <div id="waveContainer" class="flex items-center gap-1 paused">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <i id="audioIcon" class="fas fa-heart text-burgundy text-sm group-hover:scale-110 transition-transform"></i>
+            <span id="audioText" class="text-xs font-bold text-burgundy pr-1">موسيقى هادئة 🎵</span>
+        </button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-20">
+
+        <!-- 1. HERO SECTION -->
+        <header class="text-center pt-8 pb-12 space-y-8 relative">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-burgundy/5 border border-burgundy/15 text-burgundy text-sm font-bold tracking-wide shadow-sm">
+                <i class="fas fa-crown text-gold"></i>
+                <span>عرض استثماري مخصص لأعظم أم</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl font-black text-slateDark leading-tight">
+                إلى أمي الغالية <span class="text-burgundy font-amiri font-bold italic underline decoration-gold/60">عبير</span> 🤍
+            </h1>
+
+            <p class="text-lg sm:text-2xl text-slateDark/80 font-medium max-w-2xl mx-auto leading-relaxed">
+                "خطوتي الأولى نحو بناء مستقبلي والعمل بجد تحتاج إلى دعمكِ القوي.. لمسَة ثقة منكِ تصنع كل الفرق!"
+            </p>
+
+            <!-- DEVICE SELECTOR TOGGLE (Interactive Feature) -->
+            <div class="max-w-md mx-auto pt-4">
+                <p class="text-xs font-bold text-slateDark/60 mb-3 uppercase tracking-wider">حددّي الجهاز الذي تودين إعارته لي يا أمي:</p>
+                <div class="bg-cream-dark p-1.5 rounded-2xl flex items-center border border-gold/30 shadow-inner">
+                    <button id="btnLaptop" onclick="switchDevice('laptop')" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 device-tab-active cursor-pointer">
+                        <i class="fas fa-laptop text-lg"></i>
+                        <span>اللابتوب 💻</span>
+                    </button>
+                    <button id="btnIpad" onclick="switchDevice('ipad')" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base text-slateDark/70 hover:text-burgundy transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fas fa-tablet-alt text-lg"></i>
+                        <span>الآيباد 📱</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Device Context Banner -->
+            <div id="deviceBanner" class="glass-card max-w-2xl mx-auto p-4 rounded-2xl border-r-4 border-r-burgundy text-right transition-all duration-300">
+                <p class="text-sm font-bold text-burgundy flex items-center gap-2">
+                    <i class="fas fa-lightbulb text-gold"></i>
+                    <span id="bannerTitle">اختيار ممتاز! اللابتوب سينقل أعمالي لمستوى محترف:</span>
+                </p>
+                <p id="bannerDesc" class="text-xs sm:text-sm text-slateDark/80 mt-1">
+                    سأستخدمه لتعلم البرمجة، إدارة المشاريع، وكتابة الأكواد والتصميم الاحترافي بتركيز عالٍ.
+                </p>
+            </div>
+        </header>
+
+        <!-- 2. WHY I NEED IT / WORK GOALS -->
+        <section class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-gold font-bold text-sm tracking-widest uppercase">الهدف والمسؤولية</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-burgundy">لماذا أحتاج الجهاز؟ (خطة العمل) 🚀</h2>
+                <p class="text-slateDark/70 text-sm sm:text-base max-w-xl mx-auto">لست أبحث عن التسلية أو إضاعة الوقت، بل أهدف لبناء مهارات حقيقية تحقق لي الدخل والتفوق</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Goal Card 1 -->
+                <div class="glass-card p-6 rounded-3xl hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-soft-lg space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-burgundy/10 text-burgundy flex items-center justify-center text-xl font-bold">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slateDark">البرمجة وتطوير المواقع</h3>
+                    <p class="text-slateDark/70 text-sm leading-relaxed">
+                        تعلم اللغات الحديثة وبناء تطبيقات ومواقع إلكترونية حقيقية تمكنني من دخول سوق العمل والعمل الحر.
+                    </p>
+                </div>
+
+                <!-- Goal Card 2 -->
+                <div class="glass-card p-6 rounded-3xl hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-soft-lg space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gold/20 text-gold-dark flex items-center justify-center text-xl font-bold">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slateDark">التصميم وإنتاج المحتوى</h3>
+                    <p class="text-slateDark/70 text-sm leading-relaxed">
+                        إنشاء التصاميم والغرافيكس واكتساب مهارات بصرية تتيح لي تقديم خدمات للعملاء وصنع هوية مستقلة.
+                    </p>
+                </div>
+
+                <!-- Goal Card 3 -->
+                <div class="glass-card p-6 rounded-3xl hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-soft-lg space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-soft/30 text-burgundy flex items-center justify-center text-xl font-bold">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slateDark">الاستقلالية وبناء المستقل</h3>
+                    <p class="text-slateDark/70 text-sm leading-relaxed">
+                        استثمار الوقت بشكل مثمر ومسؤول يعود عليّ بالنفع المادي والمعنوي ويجعلني دائماً عند حسن ظنكِ.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. MY COMMITMENTS TO MOM -->
+        <section class="glass-card rounded-3xl p-8 sm:p-12 shadow-soft-lg border-2 border-gold/40 relative overflow-hidden">
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-gold/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="text-center space-y-3">
+                    <div class="w-14 h-14 bg-burgundy text-cream rounded-2xl mx-auto flex items-center justify-center text-2xl shadow-md">
+                        <i class="fas fa-shield-heart"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-burgundy">تعهداتي والتزاماتي لكِ يا أمي عبير 📜</h2>
+                    <p class="text-slateDark/70 text-sm">أضامَن كامل العناية والمسؤولية تجاه الجهاز الذي ستؤتمنينني عليه:</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Promise Item 1 -->
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-cream-dark/60 border border-burgundy/10">
+                        <div class="mt-1 text-burgundy text-lg"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slateDark">الحفاظ الكلي والنظافة التامة</h4>
+                            <p class="text-xs sm:text-sm text-slateDark/70">أعدكِ بالعناية بالجهاز كأنه أثمن ما أملك، واستخدامه في مكان مخصص ونظيف دائماً.</p>
+                        </div>
+                    </div>
+
+                    <!-- Promise Item 2 -->
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-cream-dark/60 border border-burgundy/10">
+                        <div class="mt-1 text-burgundy text-lg"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slateDark">الأولوية التامة لكِ في أي وقت</h4>
+                            <p class="text-xs sm:text-sm text-slateDark/70">في حال احتجتِ الجهاز لأي أمر شخصي أو ترفيهي، سأقدمه لكِ فوراً وبدون أي تردد.</p>
+                        </div>
+                    </div>
+
+                    <!-- Promise Item 3 -->
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-cream-dark/60 border border-burgundy/10">
+                        <div class="mt-1 text-burgundy text-lg"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slateDark">تقارير إنجاز دورية تُفرح قلبكِ</h4>
+                            <p class="text-xs sm:text-sm text-slateDark/70">سأطلعكِ أسبوعياً على ما تعلمته وإنجازاتي لتري بنفسكِ ثمرة دعمكِ وتشجيعكِ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. WHAT MOM GETS IN RETURN (ROI) -->
+        <section class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-gold font-bold text-sm tracking-widest uppercase">مكاسبكِ من هذا الدعم</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-burgundy">ماذا ستكسبين يا أمي؟ 🎁</h2>
+                <p class="text-slateDark/70 text-sm max-w-md mx-auto">لأنكِ الشريك الأساسي والداعم الأول في هذا النجاح:</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Advantage 1 -->
+                <div class="bg-cream-light p-6 rounded-3xl border border-gold/30 shadow-sm text-center space-y-3">
+                    <div class="text-3xl text-gold"><i class="fas fa-headset"></i></div>
+                    <h3 class="font-bold text-lg text-burgundy">دعم تقني مجاني مدى الحياة</h3>
+                    <p class="text-xs text-slateDark/70">أنا المساعد التقني الخاص بكِ لحل أي مشكلة في هاتفكِ أو أجهزتكِ فوراً!</p>
+                </div>
+
+                <!-- Advantage 2 -->
+                <div class="bg-cream-light p-6 rounded-3xl border border-gold/30 shadow-sm text-center space-y-3">
+                    <div class="text-3xl text-rose-deep"><i class="fas fa-gift"></i></div>
+                    <h3 class="font-bold text-lg text-burgundy">تصاميم وإهداءات خاصة</h3>
+                    <p class="text-xs text-slateDark/70">تصميم بطاقات معايدة وصور احترافية لكِ ولصديقاتكِ وفي كل مناسباتكِ السعيدة.</p>
+                </div>
+
+                <!-- Advantage 3 -->
+                <div class="bg-cream-light p-6 rounded-3xl border border-gold/30 shadow-sm text-center space-y-3 sm:col-span-2 lg:col-span-1">
+                    <div class="text-3xl text-burgundy"><i class="fas fa-heart-circle-check"></i></div>
+                    <h3 class="font-bold text-lg text-burgundy">فخر واعتزاز مستمر</h3>
+                    <p class="text-xs text-slateDark/70">أن ترين ابنكِ ينجح ويتطور بفضل ثقتكِ ودعمكِ الكريـم له.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. DIGITAL CONTRACT / AGREEMENT (INTERACTIVE) -->
+        <section id="contractSection" class="bg-gradient-to-br from-burgundy via-burgundy-dark to-slateDark text-cream rounded-3xl p-8 sm:p-14 text-center space-y-8 shadow-2xl relative overflow-hidden border-2 border-gold">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="inline-block px-4 py-1.5 rounded-full bg-gold/20 text-gold text-xs font-bold border border-gold/30">
+                عقد اتفاق ومحبة رسمي 🤝
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-amiri font-bold text-gold">عقد إعارة وتأكيد الثقة</h2>
+
+            <p class="text-rose-light/90 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed font-light">
+                بضغطتكِ على هذا الزر يا أمي الغالية <strong class="text-gold font-bold">عبير</strong>، تعلنين موافقتكِ المباركة على إعارتي <span id="contractDeviceName" class="text-gold underline font-bold">اللابتوب</span> لبدء رحلة عملي ومستقبلي!
+            </p>
+
+            <div class="pt-4">
+                <button onclick="approveContract()" class="px-10 py-5 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold text-burgundy-dark font-black text-xl shadow-gold-glow hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer border-2 border-white">
+                    <i class="fas fa-pen-nib ml-2"></i> موافقة.. وببركة الله يا بني! ✨
+                </button>
+            </div>
+
+            <p class="text-xs text-rose-light/60">هذا العقد موثوق بمحبتكِ ودعائكِ المستمر ❤️</p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-xs text-slateDark/50 pt-8 border-t border-gold/20 space-y-2">
+            <p class="font-amiri text-sm text-burgundy font-bold">ابنكِ المحب والمخلص دائماً ❤️</p>
+            <p>تم صياغة وبناء هذا الموقع خصيصاً لأمي الغالية عبير ✨</p>
+        </footer>
+
+    </div>
+
+    <!-- CELEBRATION MODAL (POPUP ON APPROVAL) -->
+    <div id="approvalModal" class="fixed inset-0 z-50 bg-black/70 hidden items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-cream rounded-3xl max-w-md w-full p-8 text-center space-y-6 border-2 border-gold shadow-2xl relative animate-bounce-short">
+            <div class="w-20 h-20 rounded-full bg-burgundy/10 text-burgundy mx-auto flex items-center justify-center text-4xl shadow-inner">
+                <i class="fas fa-heart text-burgundy animate-pulse"></i>
+            </div>
+
+            <h3 class="text-3xl font-amiri font-bold text-burgundy">شكراً من الأعماق يا أمي! 🤍</h3>
+
+            <p class="text-slateDark text-sm sm:text-base leading-relaxed font-medium">
+                الله يحفظكِ لي يا أمي <strong class="text-burgundy">عبير</strong> ويقدرني أكون عند حسن ظنكِ دائماً، وأعدكِ أن أصنع من هذا الدعم نجاحاً تفخرين به أمامي وأمام الجميع! 🚀✨
+            </p>
+
+            <button onclick="closeModal()" class="w-full py-3.5 rounded-full bg-burgundy text-cream font-bold hover:bg-burgundy-light transition-colors shadow-lg cursor-pointer">
+                أحبكِ جداً يا أمي ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        let selectedDevice = 'laptop';
+
+        /* -------------------------------------------------------------
+           1. DEVICE SWITCHER LOGIC
+        ------------------------------------------------------------- */
+        function switchDevice(type) {
+            selectedDevice = type;
+            const btnLaptop = document.getElementById('btnLaptop');
+            const btnIpad = document.getElementById('btnIpad');
+            const bannerTitle = document.getElementById('bannerTitle');
+            const bannerDesc = document.getElementById('bannerDesc');
+            const contractDeviceName = document.getElementById('contractDeviceName');
+
+            if (type === 'laptop') {
+                btnLaptop.classList.add('device-tab-active');
+                btnLaptop.classList.remove('text-slateDark/70');
+                btnIpad.classList.remove('device-tab-active');
+                btnIpad.classList.add('text-slateDark/70');
+
+                bannerTitle.innerText = 'اختيار ممتاز! اللابتوب سينقل أعمالي لمستوى محترف:';
+                bannerDesc.innerText = 'سأستخدمه لتعلم البرمجة، إدارة المشاريع، وكتابة الأكواد والتصميم الاحترافي بتركيز عالٍ.';
+                contractDeviceName.innerText = 'اللابتوب 💻';
+            } else {
+                btnIpad.classList.add('device-tab-active');
+                btnIpad.classList.remove('text-slateDark/70');
+                btnLaptop.classList.remove('device-tab-active');
+                btnLaptop.classList.add('text-slateDark/70');
+
+                bannerTitle.innerText = 'خيار رائع وعملي! الآيباد ممتاز للإبداع والعمل المرن:';
+                bannerDesc.innerText = 'سأستخدمه في الرسم الرقمي، قراءة واستيعاب الكورسات، تدوين الملاحظات، وتصميم الواجهات بسهولة.';
+                contractDeviceName.innerText = 'الآيباد 📱';
+            }
+        }
+
+        /* -------------------------------------------------------------
+           2. CONTRACT APPROVAL & CONFETTI CELEBRATION
+        ------------------------------------------------------------- */
+        function approveContract() {
+            // Trigger Gold & Rose Celebration Confetti
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#C5A059', '#581C25', '#E8B4B8', '#FAF8F5']
+            });
+
+            // Display Approval Modal
+            const modal = document.getElementById('approvalModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('approvalModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        /* -------------------------------------------------------------
+           3. BACKGROUND AMBIENT SOUND (WEB AUDIO SYNTH)
+        ------------------------------------------------------------- */
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function initAudioSynth() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playCalmNote(freq, duration) {
+            if (!audioCtx || audioCtx.state === 'suspended') return;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        function toggleAudio() {
+            initAudioSynth();
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const wave = document.getElementById('waveContainer');
+            const text = document.getElementById('audioText');
+
+            if (!isPlaying) {
+                isPlaying = true;
+                wave.classList.remove('paused');
+                text.innerText = 'إيقاف الموسيقى 🎵';
+
+                // Soft Pentatonic Calm Melody
+                const notes = [261.63, 329.63, 392.00, 440.00, 523.25];
+                let step = 0;
+
+                melodyInterval = setInterval(() => {
+                    playCalmNote(notes[step % notes.length], 3.0);
+                    step++;
+                }, 1000);
+
+            } else {
+                isPlaying = false;
+                wave.classList.add('paused');
+                text.innerText = 'موسيقى هادئة 🎵';
+                clearInterval(melodyInterval);
+            }
+        }
+    </script>
+</body>
+</html>
